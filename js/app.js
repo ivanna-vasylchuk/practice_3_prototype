@@ -379,6 +379,7 @@ function nextStep() {
     case 'lock': refreshList(); show('list', 'fade'); break;
     case 'list': case 'empty': S.removed.delete('1024'); refreshList(); openDetails('1024'); break;
     case 'details':
+      if (S.req === '1019') { openUnavailable(); break; }   // скасована заявка — розширення 7а
       if (!sheetOpen) { openSheet(); break; }
       S.dur = S.dur || '~1 год'; S.day = S.day || 'Сьогодні'; S.slot = S.slot || '16:00';
       updateSheet(); setTimeout(confirmTime, 350); break;
@@ -471,6 +472,16 @@ $('#chatForm').addEventListener('submit', e => { e.preventDefault(); sendMessage
 $('#gallery').addEventListener('scroll', updateDots, { passive: true });
 $('#nextStep').addEventListener('click', nextStep);
 $('#restart').addEventListener('click', restart);
+
+/* ---------- Телефон завжди вміщається у висоту екрана (ноутбук, проєктор) ---------- */
+function fitPhone() {
+  const wrap = document.querySelector('.device-wrap');
+  if (window.innerWidth <= 860) { wrap.style.zoom = ''; return; }
+  const need = 920;                                   // плашка + телефон з рамкою
+  wrap.style.zoom = Math.min(1, (window.innerHeight - 32) / need).toFixed(3);
+}
+window.addEventListener('resize', fitPhone);
+fitPhone();
 
 /* старт */
 document.querySelectorAll('.app-name').forEach(el => el.textContent = APP_NAME);
