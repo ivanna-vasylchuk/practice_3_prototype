@@ -470,3 +470,10 @@ p.muted { display: block; line-height: 1.45; }
 .push-body { gap: 1px; }
 .push .app-name { font-size: 13px; font-weight: 700; color: var(--text); }
 .push-text { font-size: 14px; color: var(--text); }
+
+/* телефон «прилипає» до верху екрана, коли прокручуєте довгий список ліворуч */
+@media (min-width: 861px) {
+  .stage { align-items: flex-start; }
+  .device-wrap { position: sticky; top: 16px; }
+  .panel { padding-top: 24px; }
+}
