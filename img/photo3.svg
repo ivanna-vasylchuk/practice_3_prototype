@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <rect width="400" height="260" fill="#DCE4EE"/>
+  <rect x="0" y="0" width="400" height="40" fill="#C6D2E0"/>
+  <rect x="40" y="40" width="320" height="220" fill="#EEF2F7" stroke="#C6D2E0" stroke-width="3"/>
+  <path d="M150 40v70a20 20 0 0 0 20 20h60a20 20 0 0 1 20 20v110" fill="none" stroke="#9AA7B6" stroke-width="18"/>
+  <path d="M250 40v40" stroke="#9AA7B6" stroke-width="18"/>
+  <rect x="236" y="70" width="28" height="14" rx="4" fill="#D2691E"/>
+  <rect x="136" y="70" width="28" height="14" rx="4" fill="#5B8FCB"/>
+  <ellipse cx="200" cy="232" rx="90" ry="14" fill="#5B8FCB" opacity=".45"/>
+  <path d="M232 132c-5 8-7 12-7 16a7 7 0 0 0 14 0c0-4-2-8-7-16z" fill="#5B8FCB"/>
+  <rect x="12" y="12" width="150" height="26" rx="13" fill="#2F4858" opacity=".85"/>
+  <text x="87" y="30" font-family="Montserrat, Arial" font-size="13" font-weight="600" fill="#fff" text-anchor="middle">Під мийкою мокро</text>
+</svg>

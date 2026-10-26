@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260">
+  <defs><linearGradient id="w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E9EEF4"/><stop offset="1" stop-color="#D5DEE9"/></linearGradient>
+  <linearGradient id="m" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9AA7B6"/><stop offset=".5" stop-color="#E3E8EE"/><stop offset="1" stop-color="#8E9BAA"/></linearGradient></defs>
+  <rect width="400" height="260" fill="url(#w)"/>
+  <g stroke="#C9D3DF" stroke-width="2"><path d="M0 70h400M0 140h400"/><path d="M100 0v70M250 0v70M40 70v70M180 70v70M330 70v70"/></g>
+  <rect x="0" y="190" width="400" height="70" fill="#B0C4DE"/>
+  <ellipse cx="205" cy="210" rx="120" ry="22" fill="#9DB3CF"/>
+  <rect x="150" y="150" width="110" height="40" rx="10" fill="url(#m)"/>
+  <rect x="190" y="70" width="30" height="85" rx="8" fill="url(#m)"/>
+  <path d="M205 80 C205 40 300 40 300 85 L300 110" fill="none" stroke="url(#m)" stroke-width="22" stroke-linecap="round"/>
+  <rect x="180" y="58" width="50" height="16" rx="8" fill="#7C8A99"/>
+  <path d="M300 128c-6 10-9 15-9 20a9 9 0 0 0 18 0c0-5-3-10-9-20z" fill="#5B8FCB"/>
+  <path d="M300 160c-4 7-6 10-6 13a6 6 0 0 0 12 0c0-3-2-6-6-13z" fill="#5B8FCB" opacity=".8"/>
+  <ellipse cx="300" cy="205" rx="28" ry="6" fill="#5B8FCB" opacity=".55"/>
+  <rect x="12" y="12" width="132" height="26" rx="13" fill="#2F4858" opacity=".85"/>
+  <text x="78" y="30" font-family="Montserrat, Arial" font-size="13" font-weight="600" fill="#fff" text-anchor="middle">Змішувач, кухня</text>
+</svg>

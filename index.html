@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Прототип · Прийняття замовлення</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Іконки (набір у стилі Lucide). Використання: <svg class="ic"><use href="#i-bell"/></svg> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+    <symbol id="i-unlock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-faucet" viewBox="0 0 24 24"><path d="M3 10h9a3 3 0 0 1 3 3v1"/><path d="M3 7v6"/><path d="M8 10V5"/><path d="M5 5h6"/><path d="M15 17.5c0 1-.7 1.8-1.5 1.8S12 18.5 12 17.5s1.5-3 1.5-3 1.5 2 1.5 3z"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M9 12h6M9 16h6"/></symbol>
+    <symbol id="i-case" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.7 18-8-14a2 2 0 0 0-3.4 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3Z"/><path d="M12 9v4M12 17h.01"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+    <symbol id="i-nav" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></symbol>
+    <symbol id="i-inbox" viewBox="0 0 24 24"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5.1 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.5-6.9A2 2 0 0 0 16.8 4H7.2a2 2 0 0 0-1.7 1.1z"/></symbol>
+    <symbol id="i-mobile" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M22 3H2l8 9.5V19l4 2v-8.5L22 3z"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.8-3.8a6 6 0 0 1-7.9 7.9l-6.9 6.9a2.1 2.1 0 0 1-3-3l6.9-6.9a6 6 0 0 1 7.9-7.9l-3.8 3.8z"/></symbol>
+  </defs>
+</svg>
+
+<div class="stage">
+
+  <!-- ЛІВА ПАНЕЛЬ: опис і список екранів для показу на захисті -->
+  <aside class="panel">
+    <p class="panel-kicker">Практична робота 3 · Прототип</p>
+    <h1>Use-case 2.<br>Прийняття замовлення</h1>
+    <p class="panel-text">Сервіс виклику побутових майстрів. Клікайте по застосунку або переходьте до потрібного екрана.</p>
+
+    <div class="panel-actions">
+      <button class="btn-panel primary" id="nextStep">Далі за сценарієм →</button>
+    </div>
+
+    <h2>Екрани</h2>
+    <p class="panel-group"><span class="dot dot-master"></span>Телефон майстра</p>
+    <ol class="screens" id="screensMaster">
+      <li data-go="lock"><b>1</b>Сповіщення про заявку</li>
+      <li data-go="list"><b>2</b>Нові заявки</li>
+      <li data-go="empty"><b>3а</b>Нових заявок немає</li>
+      <li data-go="details"><b>3</b>Деталі заявки</li>
+      <li data-go="time"><b>4</b>Орієнтовний час (6б)</li>
+      <li data-go="accepted"><b>5</b>Заявку прийнято</li>
+      <li data-go="unavailable"><b>6</b>Заявка недоступна (7а)</li>
+    </ol>
+    <p class="panel-group"><span class="dot dot-client"></span>Телефон клієнта</p>
+    <ol class="screens" id="screensClient">
+      <li data-go="clientPush"><b>7</b>Сповіщення клієнту</li>
+      <li data-go="candidates"><b>8</b>Кандидати</li>
+      <li data-go="profile"><b>8а</b>Профіль майстра</li>
+      <li data-go="confirmed"><b>9</b>Заявка підтверджена</li>
+      <li data-go="chat"><b>10</b>Чат з майстром</li>
+    </ol>
+    <p class="panel-group"><span class="dot dot-master"></span>Знову телефон майстра</p>
+    <ol class="screens" id="screensMaster2">
+      <li data-go="chosen"><b>11</b>Клієнт обрав вас</li>
+      <li data-go="notChosen"><b>11б</b>Обрано іншого (7б)</li>
+    </ol>
+    <button class="btn-panel btn-restart" id="restart">Почати спочатку</button>
+  </aside>
+
+  <!-- ТЕЛЕФОН -->
+  <div class="device-wrap">
+    <div class="role-chip" id="roleChip"><svg class="ic"><use href="#i-mobile"/></svg><span>Телефон майстра</span></div>
+
+    <div class="phone" id="phone">
+      <!-- статус-бар -->
+      <div class="statusbar" id="statusbar">
+        <span class="sb-time">9:41</span>
+        <span class="sb-icons">
+          <svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+          <svg viewBox="0 0 27 12"><rect x=".5" y=".5" width="23" height="11" rx="3" fill="none" stroke="currentColor" opacity=".5"/><rect x="2" y="2" width="18" height="8" rx="2"/><rect x="24.5" y="4" width="2" height="4" rx="1" opacity=".5"/></svg>
+        </span>
+      </div>
+
+      <!-- ===== 1. Екран блокування з push (майстер) ===== -->
+      <section class="screen lock" data-screen="lock" data-role="master" data-theme="dark">
+        <div class="lock-time">9:41</div>
+        <div class="lock-date">понеділок, 26 жовтня</div>
+        <button class="push push-lock" data-action="openFromPush">
+          <span class="push-app"><svg class="ic"><use href="#i-bell"/></svg></span>
+          <span class="push-body">
+            <b class="app-name">Сервіс виклику майстрів</b>
+            <span class="push-text">Нова заявка: Сантехніка · Заміна змішувача · Оболонь · 400–700 грн</span>
+          </span>
+        </button>
+        <p class="lock-hint">Натисніть на сповіщення, щоб одразу відкрити заявку</p>
+        <button class="lock-open" data-go="list" data-anim="fade">Відкрити застосунок</button>
+      </section>
+
+      <!-- ===== 2. Нові заявки (майстер) ===== -->
+      <section class="screen" data-screen="list" data-role="master" data-theme="dark">
+        <header class="appbar appbar-hello">
+          <div>
+            <p class="hello-small">Доброго дня,</p>
+            <p class="hello-big">Олегу!</p>
+          </div>
+          <span class="round-btn"><svg class="ic"><use href="#i-bell"/></svg></span>
+        </header>
+        <div class="content">
+          <div class="filter-row">
+            <span class="chip chip-light"><svg class="ic"><use href="#i-faucet"/></svg>Сантехніка</span>
+            <span class="chip chip-light"><svg class="ic"><use href="#i-pin"/></svg>Оболонь</span>
+          </div>
+          <p class="hint"><svg class="ic"><use href="#i-filter"/></svg>Показуємо заявки за вашими навичками й районом</p>
+
+          <div class="segmented">
+            <button class="seg active">Нові <span class="count" id="newCount">2</span></button>
+            <button class="seg" data-toast="Тут будуть заявки, які ви прийняли">Мої роботи</button>
+          </div>
+
+          <div id="cards">
+            <article class="card req-card" data-req="1024">
+              <div class="req-head"><span class="req-no">Заявка №1024</span><span class="badge badge-new">Нова</span></div>
+              <div class="req-main">
+                <span class="req-icon"><svg class="ic"><use href="#i-faucet"/></svg></span>
+                <div><p class="req-title">Сантехніка</p><p class="req-sub">Заміна змішувача · Оболонь</p></div>
+              </div>
+              <div class="req-foot"><span class="price">400–700 грн</span><span class="muted"><svg class="ic"><use href="#i-clock"/></svg>25 жовтня, 23:35</span></div>
+            </article>
+            <article class="card req-card" data-req="1019">
+              <div class="req-head"><span class="req-no">Заявка №1019</span><span class="badge badge-new">Нова</span></div>
+              <div class="req-main">
+                <span class="req-icon"><svg class="ic"><use href="#i-faucet"/></svg></span>
+                <div><p class="req-title">Сантехніка</p><p class="req-sub">Усунення протікання · Оболонь</p></div>
+              </div>
+              <div class="req-foot"><span class="price">300–600 грн</span><span class="muted"><svg class="ic"><use href="#i-clock"/></svg>25 жовтня, 23:22</span></div>
+            </article>
+          </div>
+          <div class="empty" id="emptyInline" hidden>
+            <span class="empty-ic"><svg class="ic"><use href="#i-inbox"/></svg></span>
+            <p class="empty-title">Нових заявок поки немає</p>
+            <p class="muted">Ми надішлемо сповіщення, щойно з'явиться заявка за вашими навичками в Оболоні.</p>
+          </div>
+        </div>
+        <nav class="tabbar">
+          <span class="tab active"><svg class="ic"><use href="#i-list"/></svg>Заявки</span>
+          <span class="tab" data-toast="Розділ «Мої роботи» в цьому сценарії не показуємо"><svg class="ic"><use href="#i-case"/></svg>Мої роботи</span>
+          <span class="tab" data-toast="Профіль майстра в цьому сценарії не показуємо"><svg class="ic"><use href="#i-user"/></svg>Профіль</span>
+        </nav>
+      </section>
+
+      <!-- ===== 3а. Нових заявок немає (майстер) ===== -->
+      <section class="screen" data-screen="empty" data-role="master" data-theme="dark">
+        <header class="appbar appbar-hello">
+          <div><p class="hello-small">Доброго дня,</p><p class="hello-big">Олегу!</p></div>
+          <span class="round-btn"><svg class="ic"><use href="#i-bell"/></svg></span>
+        </header>
+        <div class="content">
+          <div class="filter-row">
+            <span class="chip chip-light"><svg class="ic"><use href="#i-faucet"/></svg>Сантехніка</span>
+            <span class="chip chip-light"><svg class="ic"><use href="#i-pin"/></svg>Оболонь</span>
+          </div>
+          <div class="segmented">
+            <button class="seg active">Нові <span class="count">0</span></button>
+            <button class="seg">Мої роботи</button>
+          </div>
+          <div class="empty">
+            <span class="empty-ic"><svg class="ic"><use href="#i-inbox"/></svg></span>
+            <p class="empty-title">Нових заявок поки немає</p>
+            <p class="muted">Ми надішлемо сповіщення, щойно з'явиться заявка за вашими навичками в Оболоні.</p>
+          </div>
+        </div>
+        <nav class="tabbar">
+          <span class="tab active"><svg class="ic"><use href="#i-list"/></svg>Заявки</span>
+          <span class="tab"><svg class="ic"><use href="#i-case"/></svg>Мої роботи</span>
+          <span class="tab"><svg class="ic"><use href="#i-user"/></svg>Профіль</span>
+        </nav>
+      </section>
+
+      <!-- ===== 3. Деталі заявки (майстер) ===== -->
+      <section class="screen" data-screen="details" data-role="master" data-theme="dark">
+        <header class="appbar">
+          <button class="back" data-go="list" data-anim="back"><svg class="ic"><use href="#i-back"/></svg></button>
+          <span class="appbar-title" id="detTitle">Заявка №1024</span>
+        </header>
+        <div class="content content-pad-bottom">
+          <div class="gallery" id="gallery">
+            <img src="img/photo1.svg" alt="Фото несправності 1">
+            <img src="img/photo2.svg" alt="Фото несправності 2">
+            <img src="img/photo3.svg" alt="Фото несправності 3">
+          </div>
+          <div class="dots" id="dots"><i class="on"></i><i></i><i></i></div>
+
+          <div class="det-head">
+            <span class="req-icon"><svg class="ic"><use href="#i-faucet"/></svg></span>
+            <div><p class="req-title" id="detTitle2">Сантехніка</p><p class="req-sub" id="detSub">Заміна змішувача</p></div>
+            <span class="badge badge-new">Нова</span>
+          </div>
+
+          <p class="label">Що сталося</p>
+          <p class="body-text" id="detDesc">Тече змішувач на кухні, вода капає постійно. Змішувач старий, потрібна заміна.</p>
+
+          <div class="info-list">
+            <div class="info-row"><svg class="ic"><use href="#i-pin"/></svg><div><p class="info-main">вул. Героїв Дніпра, Оболонь</p><p class="muted small">Точна адреса — після вибору клієнтом</p></div></div>
+          </div>
+          <div class="map-box">
+            <img src="img/map.svg" alt="Мапа: ви та адреса заявки">
+            <span class="map-chip"><svg class="ic"><use href="#i-nav"/></svg>2,3 км · ~10 хв</span>
+          </div>
+          <div class="info-list">
+            <div class="info-row"><svg class="ic"><use href="#i-wrench"/></svg><div><p class="info-main" id="detPrice">400–700 грн</p><p class="muted small">Діапазон, який бачив клієнт</p></div></div>
+            <div class="info-row"><svg class="ic"><use href="#i-clock"/></svg><div><p class="info-main" id="detTimeAgo">Створена 25 жовтня, 23:35</p></div></div>
+          </div>
+
+          <div class="locked">
+            <svg class="ic"><use href="#i-lock"/></svg>
+            <div><p class="info-main">Телефон клієнта прихований</p><p class="small">Він стане доступним після того, як клієнт обере вас виконавцем.</p></div>
+          </div>
+        </div>
+        <footer class="footer-actions">
+          <button class="btn btn-primary" data-action="accept">Прийняти</button>
+          <button class="btn btn-outline" data-action="ignore">Ігнорувати</button>
+        </footer>
+      </section>
+
+      <!-- ===== 5. Заявку прийнято (майстер) ===== -->
+      <section class="screen" data-screen="accepted" data-role="master" data-theme="light">
+        <div class="content center-content">
+          <span class="big-check"><svg class="ic"><use href="#i-check"/></svg></span>
+          <h3 class="center-title">Вас додано до кандидатів</h3>
+          <p class="muted center">Клієнт отримав сповіщення. Чекайте, поки він обере виконавця.</p>
+          <div class="card summary">
+            <div class="req-head"><span class="req-no">Заявка №1024</span><span class="badge badge-wait">Очікує вибору</span></div>
+            <div class="req-main">
+              <span class="req-icon"><svg class="ic"><use href="#i-faucet"/></svg></span>
+              <div><p class="req-title">Заміна змішувача</p><p class="req-sub">вул. Героїв Дніпра, Оболонь</p></div>
+            </div>
+            <div class="info-row"><svg class="ic"><use href="#i-cal"/></svg><p class="info-main" id="accWhen">Сьогодні, 16:00 · ~1 год</p></div>
+          </div>
+          <p class="muted small center auto-note" id="autoNote">Через кілька секунд покажемо, що бачить клієнт…</p>
+        </div>
+        <footer class="footer-actions">
+          <button class="btn btn-outline" data-go="list" data-anim="back">До заявок</button>
+        </footer>
+      </section>
+
+      <!-- ===== Перемикач ролей: «Тим часом у клієнта / у майстра» ===== -->
+      <section class="screen switch" data-screen="switch" data-theme="dark">
+        <span class="switch-ic"><svg class="ic"><use href="#i-mobile"/></svg></span>
+        <p class="switch-small">Тим часом</p>
+        <p class="switch-big" id="switchText">на телефоні клієнта</p>
+      </section>
+
+      <!-- ===== 7. Сповіщення клієнту (клієнт, «Мої заявки») ===== -->
+      <section class="screen" data-screen="clientPush" data-role="client" data-theme="dark">
+        <header class="appbar"><span class="appbar-title appbar-title-left">Мої заявки</span></header>
+        <div class="content">
+          <div class="tabs-line"><span class="active">Активні</span><span>Виконані</span><span>Оплачені</span></div>
+          <article class="card req-card">
+            <div class="req-head"><span class="req-no">Заявка №1024</span><span class="badge badge-new">Нова</span></div>
+            <div class="req-main">
+              <span class="req-icon"><svg class="ic"><use href="#i-faucet"/></svg></span>
+              <div><p class="req-title">Сантехніка</p><p class="req-sub">Заміна змішувача · Оболонь</p></div>
+            </div>
+            <p class="price price-block">400–700 грн</p>
+            <p class="req-date">25 жовтня, 23:35</p>
+            <p class="cand-line"><span class="avatars"><i class="av av-o">ОЛ</i><i class="av av-i">ІБ</i><i class="av av-a">АС</i></span>3 майстри готові приїхати</p>
+            <button class="btn btn-primary btn-sm" data-go="candidates">Переглянути кандидатів</button>
+            <button class="btn btn-outline btn-sm" data-toast="Скасування заявки показано в use-case 1">Скасувати</button>
+          </article>
+        </div>
+        <nav class="tabbar">
+          <span class="tab"><svg class="ic"><use href="#i-home"/></svg>Головна</span>
+          <span class="tab active"><svg class="ic"><use href="#i-list"/></svg>Мої заявки</span>
+          <span class="tab"><svg class="ic"><use href="#i-user"/></svg>Профіль</span>
+        </nav>
+        <button class="push push-top" id="clientPushBanner" data-go="candidates">
+          <span class="push-app"><svg class="ic"><use href="#i-bell"/></svg></span>
+          <span class="push-body">
+            <b class="app-name">Сервіс виклику майстрів</b>
+            <span class="push-text">Майстер Олег прийняв вашу заявку</span>
+          </span>
+        </button>
+      </section>
+
+      <!-- ===== 8. Кандидати (клієнт) ===== -->
+      <section class="screen" data-screen="candidates" data-role="client" data-theme="dark">
+        <header class="appbar">
+          <button class="back" data-go="clientPush" data-anim="back"><svg class="ic"><use href="#i-back"/></svg></button>
+          <span class="appbar-title">Кандидати</span>
+        </header>
+        <div class="content">
+          <p class="sub-head">Заявка №1024 · Заміна змішувача</p>
+          <div id="candList"></div>
+          <p class="note"><svg class="ic"><use href="#i-info"/></svg>Ваш телефон і точну адресу побачить лише обраний майстер.</p>
+        </div>
+      </section>
+
+      <!-- ===== 8а. Профіль майстра (клієнт) ===== -->
+      <section class="screen" data-screen="profile" data-role="client" data-theme="dark">
+        <header class="appbar">
+          <button class="back" data-go="candidates" data-anim="back"><svg class="ic"><use href="#i-back"/></svg></button>
+          <span class="appbar-title">Профіль майстра</span>
+        </header>
+        <div class="content content-pad-bottom" id="profileBody"></div>
+        <footer class="footer-actions"><button class="btn btn-primary" id="profileChoose">Обрати</button></footer>
+      </section>
+
+      <!-- ===== 9. Заявка підтверджена (клієнт) ===== -->
+      <section class="screen" data-screen="confirmed" data-role="client" data-theme="dark">
+        <header class="appbar">
+          <button class="back" data-go="candidates" data-anim="back"><svg class="ic"><use href="#i-back"/></svg></button>
+          <span class="appbar-title">Заявка №1024</span>
+        </header>
+        <div class="content">
+          <div class="status-hero">
+            <span class="badge badge-confirmed">Підтверджена</span>
+            <p class="status-hero-title">Майстра обрано!</p>
+            <p class="muted">Він уже отримав вашу адресу й номер телефону.</p>
+          </div>
+          <div class="card master-card" id="confMaster"></div>
+          <div class="info-list card">
+            <div class="info-row"><svg class="ic"><use href="#i-cal"/></svg><div><p class="info-main" id="confWhen">Сьогодні, 16:00</p><p class="muted small">Орієнтовна тривалість <span id="confDur">~1 год</span></p></div></div>
+            <div class="info-row"><svg class="ic"><use href="#i-pin"/></svg><div><p class="info-main">вул. Героїв Дніпра, 12, кв. 45</p><p class="muted small">Оболонь</p></div></div>
+            <div class="info-row"><svg class="ic"><use href="#i-wrench"/></svg><div><p class="info-main">400–700 грн</p><p class="muted small">Остаточна ціна не вийде за діапазон</p></div></div>
+          </div>
+        </div>
+        <footer class="footer-actions row">
+          <button class="btn btn-outline" data-toast="Дзвінок майстру…"><svg class="ic"><use href="#i-phone"/></svg>Подзвонити</button>
+          <button class="btn btn-primary" data-action="chatClient"><svg class="ic"><use href="#i-chat"/></svg>Чат</button>
+        </footer>
+      </section>
+
+      <!-- ===== 10. Чат (клієнт ↔ майстер) ===== -->
+      <section class="screen" data-screen="chat" data-theme="dark">
+        <header class="appbar">
+          <button class="back" id="chatBack"><svg class="ic"><use href="#i-back"/></svg></button>
+          <span class="chat-head"><i class="av" id="chatAv">ОЛ</i><span><b id="chatName">Олег Литвиненко</b><small id="chatRoleTxt">майстер · онлайн</small></span></span>
+        </header>
+        <div class="content chat-body" id="chatBody"></div>
+        <div class="quick" id="quick"></div>
+        <form class="chat-input" id="chatForm" autocomplete="off">
+          <input id="chatText" placeholder="Повідомлення…">
+          <button class="send" aria-label="Надіслати"><svg class="ic"><use href="#i-send"/></svg></button>
+        </form>
+      </section>
+
+      <!-- ===== 11. Клієнт обрав вас (майстер) ===== -->
+      <section class="screen" data-screen="chosen" data-role="master" data-theme="dark">
+        <header class="appbar">
+          <button class="back" data-go="list" data-anim="back"><svg class="ic"><use href="#i-back"/></svg></button>
+          <span class="appbar-title">Заявка №1024</span>
+        </header>
+        <div class="content content-pad-bottom">
+          <div class="status-hero">
+            <span class="badge badge-confirmed">Підтверджена</span>
+            <p class="status-hero-title">Клієнт обрав вас!</p>
+            <p class="muted">Тепер вам доступні контакти й точна адреса.</p>
+          </div>
+          <div class="card">
+            <div class="client-row">
+              <i class="av av-client">ОК</i>
+              <div><p class="info-main">Олексій Коваленко</p><p class="muted small">клієнт</p></div>
+            </div>
+            <div class="unlocked">
+              <svg class="ic"><use href="#i-unlock"/></svg>
+              <div><p class="muted small">Телефон клієнта</p><p class="phone-num">067 676 76 76</p></div>
+            </div>
+          </div>
+          <div class="info-list card">
+            <div class="info-row"><svg class="ic"><use href="#i-pin"/></svg><div><p class="info-main">вул. Героїв Дніпра, 12, кв. 45</p><p class="muted small">Оболонь · 2,3 км від вас</p></div></div>
+            <div class="info-row"><svg class="ic"><use href="#i-cal"/></svg><div><p class="info-main" id="chosenWhen">Сьогодні, 16:00</p><p class="muted small">Ваш орієнтовний час</p></div></div>
+            <div class="info-row"><svg class="ic"><use href="#i-faucet"/></svg><div><p class="info-main">Заміна змішувача</p><p class="muted small">400–700 грн</p></div></div>
+          </div>
+        </div>
+        <footer class="footer-actions row">
+          <button class="btn btn-outline" data-toast="Дзвінок клієнту…"><svg class="ic"><use href="#i-phone"/></svg>Подзвонити</button>
+          <button class="btn btn-primary" data-action="chatMaster"><svg class="ic"><use href="#i-chat"/></svg>Чат</button>
+        </footer>
+        <button class="push push-top" id="chosenPush" data-action="hidePush">
+          <span class="push-app"><svg class="ic"><use href="#i-bell"/></svg></span>
+          <span class="push-body">
+            <b class="app-name">Сервіс виклику майстрів</b>
+            <span class="push-text">Клієнт обрав вас виконавцем · заявка №1024</span>
+          </span>
+        </button>
+      </section>
+
+      <!-- ===== 11б. Клієнт обрав іншого (майстер) ===== -->
+      <section class="screen" data-screen="notChosen" data-role="master" data-theme="light">
+        <div class="content center-content">
+          <span class="big-check grey"><svg class="ic"><use href="#i-info"/></svg></span>
+          <h3 class="center-title">Клієнт обрав іншого майстра</h3>
+          <p class="muted center">Заявка №1024 більше неактивна. Не хвилюйтеся — ми покажемо вам нові заявки поруч.</p>
+        </div>
+        <footer class="footer-actions"><button class="btn btn-primary" data-go="list" data-anim="back">До заявок</button></footer>
+      </section>
+
+      <!-- ===== Лоадер ===== -->
+      <section class="screen" data-screen="loading" data-theme="light">
+        <div class="content center-content">
+          <svg class="gear" viewBox="0 0 100 100" aria-hidden="true">
+            <path fill="#D2691E" d="M44 6h12l2 12a33 33 0 0 1 9 4l10-7 8 8-7 10a33 33 0 0 1 4 9l12 2v12l-12 2a33 33 0 0 1-4 9l7 10-8 8-10-7a33 33 0 0 1-9 4l-2 12H44l-2-12a33 33 0 0 1-9-4l-10 7-8-8 7-10a33 33 0 0 1-4-9L6 56V44l12-2a33 33 0 0 1 4-9l-7-10 8-8 10 7a33 33 0 0 1 9-4zM50 32a18 18 0 1 0 0 36 18 18 0 0 0 0-36z"/>
+          </svg>
+          <p class="center-title small-title" id="loadingText">Надсилаємо відповідь клієнту…</p>
+        </div>
+      </section>
+
+      <!-- ===== 4. Нижня панель: орієнтовний час (оверлей) ===== -->
+      <div class="overlay" id="timeSheet" hidden>
+        <div class="backdrop" data-action="closeSheet"></div>
+        <div class="sheet">
+          <span class="grabber"></span>
+          <div class="sheet-head"><p class="sheet-title">Коли зможете приїхати?</p><button class="x" data-action="closeSheet"><svg class="ic"><use href="#i-x"/></svg></button></div>
+          <p class="label">Скільки триватиме робота</p>
+          <div class="chips" data-group="dur">
+            <button class="chip-select" data-val="~1 год">~1 год</button>
+            <button class="chip-select" data-val="~2 год">~2 год</button>
+            <button class="chip-select" data-val="3+ год">3+ год</button>
+          </div>
+          <p class="label">День</p>
+          <div class="chips" data-group="day">
+            <button class="chip-select" data-val="Сьогодні">Сьогодні</button>
+            <button class="chip-select" data-val="Завтра">Завтра</button>
+          </div>
+          <p class="label">Час приїзду</p>
+          <div class="chips" data-group="slot">
+            <button class="chip-select" data-val="12:00">12:00</button>
+            <button class="chip-select" data-val="14:00">14:00</button>
+            <button class="chip-select" data-val="16:00">16:00</button>
+            <button class="chip-select" data-val="18:00">18:00</button>
+          </div>
+          <p class="sheet-hint" id="sheetHint"><svg class="ic"><use href="#i-info"/></svg>Оберіть тривалість, день і час — без цього клієнт не зможе вас порівняти</p>
+          <button class="btn btn-primary" id="confirmTime" disabled>Підтвердити</button>
+        </div>
+      </div>
+
+      <!-- ===== 6. Модальне вікно: заявка недоступна ===== -->
+      <div class="overlay" id="unavailableModal" hidden>
+        <div class="backdrop"></div>
+        <div class="modal">
+          <span class="modal-ic"><svg class="ic"><use href="#i-alert"/></svg></span>
+          <p class="modal-title">Заявка недоступна</p>
+          <p class="muted center">Клієнт скасував заявку №1019, поки ви її переглядали. Прийняти її вже не можна.</p>
+          <button class="btn btn-primary" data-action="closeUnavailable">До заявок</button>
+        </div>
+      </div>
+
+      <div class="toast" id="toast" hidden></div>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
